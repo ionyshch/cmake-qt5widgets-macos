@@ -43,8 +43,6 @@ find_package(Qt5Widgets)
 add_executable(${PROJECT_NAME} MACOSX_BUNDLE "main.cpp" "mainwindow.cpp")
 qt5_use_modules(${PROJECT_NAME} Widgets)
 
-message(STATUS "CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS: ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS}")
-
 target_link_libraries(${PROJECT_NAME} Qt5::Widgets)
 
 add_custom_target(Docs SOURCES README.md .gitignore LICENSE)
@@ -56,7 +54,7 @@ install(TARGETS ${PROJECT_NAME}
     )
 
 # Note Mac specific extension .app
-set(APPS "${MACOSX_BUNDLE_NAME}.app")
+set(APPS "\${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}.app")
 
 # Directories to look for dependencies
 set(DIRS "${CMAKE_BINARY_DIR}")
@@ -68,9 +66,9 @@ if(CMAKE_PREFIX_PATH)
 endif()
 
 include(InstallRequiredSystemLibraries)
-include(DeployQt5)
 
-install_qt5_executable(${APPS} "${plugins}" "${ob_plugins}" "${DIRS}" "")
+install(CODE "include(BundleUtilities)
+    fixup_bundle(\"${APPS}\" \"\" \"${DIRS}\")")
 
 set(CPACK_GENERATOR "DRAGNDROP")
 include(CPack)
