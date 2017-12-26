@@ -1,4 +1,15 @@
-# cmake-qt5widgets-macos
-QtCreator doesn't provide cmake as a build system option in its Qt Widgets Application wizard. This project is to provide such template plus package necessary Qt libraries into app bundle.
+# About
 
-Next steps will be adding more third-party libraries such as ffmpeg and OpenCV and packing them into app bundle.
+Template for CMake-based Qt Widgets Application wizard.
+
+Packages necessary Qt libraries into app bundle.
+
+# Building
+
+```
+cd <path to cmake-qt5widgets-macos>
+mkdir build
+cd build
+cmake ..
+cpack -G DragNDrop
+```

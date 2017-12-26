@@ -1,3 +1,5 @@
+// Copyright (c) 2017 Ivan Onyshchenko
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
